@@ -1,7 +1,5 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Markus
- * Date: 8.09.14
- * Time: 17:03
- */ 
+<ul class="list-group">
+    <? foreach ($tags as $tag): ?>
+        <li class="list-group-item"><a href="tags/view/<?= $tag['tag_name'] ?>"><?=$tag['tag_name']?></a></li>
+    <? endforeach ?>
+</ul>
