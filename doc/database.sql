@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Loomise aeg: Sept 15, 2014 kell 10:19 EL
+-- Loomise aeg: Sept 15, 2014 kell 03:39 PL
 -- Serveri versioon: 5.6.20
 -- PHP versioon: 5.5.15
 
@@ -11,15 +11,31 @@ SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 --
 -- Andmebaas: `blog`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Tabeli struktuur tabelile `comment`
+--
+
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE IF NOT EXISTS `comment` (
+  `comment_text` text NOT NULL,
+  `post_id` int(10) unsigned NOT NULL,
+`comment_id` int(10) unsigned NOT NULL,
+  `comment_author` varchar(40) NOT NULL,
+  `comment_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Andmete tõmmistamine tabelile `comment`
+--
+
+INSERT INTO `comment` (`comment_text`, `post_id`, `comment_id`, `comment_author`, `comment_time`) VALUES
+('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 6, 7, 'asasas', '2014-09-15 16:21:10');
 
 -- --------------------------------------------------------
 
@@ -34,14 +50,15 @@ CREATE TABLE IF NOT EXISTS `post` (
   `post_text` text NOT NULL,
   `post_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int(10) unsigned NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Andmete tõmmistamine tabelile `post`
 --
 
 INSERT INTO `post` (`post_id`, `post_subject`, `post_text`, `post_created`, `user_id`) VALUES
-(6, 'asasdasdas', 'asdasd', '2014-09-04 12:31:09', 1);
+(6, 'asasdasdas', 'asdasd', '2014-09-04 12:31:09', 1),
+(7, 'lol', 'fghmsmgwvmsvwvsmvj', '2014-09-15 10:26:07', 1);
 
 -- --------------------------------------------------------
 
@@ -108,6 +125,12 @@ INSERT INTO `user` (`user_id`, `username`, `password`, `deleted`) VALUES
 --
 
 --
+-- Indeksid tabelile `comment`
+--
+ALTER TABLE `comment`
+ ADD PRIMARY KEY (`comment_id`), ADD KEY `post_id` (`post_id`);
+
+--
 -- Indeksid tabelile `post`
 --
 ALTER TABLE `post`
@@ -136,10 +159,15 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT tabelile `comment`
+--
+ALTER TABLE `comment`
+MODIFY `comment_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
 -- AUTO_INCREMENT tabelile `post`
 --
 ALTER TABLE `post`
-MODIFY `post_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `post_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT tabelile `tag`
 --
@@ -155,6 +183,12 @@ MODIFY `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 
 --
+-- Piirangud tabelile `comment`
+--
+ALTER TABLE `comment`
+ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`);
+
+--
 -- Piirangud tabelile `post`
 --
 ALTER TABLE `post`
@@ -167,7 +201,3 @@ ALTER TABLE `post_tags`
 ADD CONSTRAINT `post_tags_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`),
 ADD CONSTRAINT `post_tags_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`tag_id`);
 SET FOREIGN_KEY_CHECKS=1;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
