@@ -7,3 +7,5 @@
         </div>
     </div>
 <?endforeach?>
+<?foreach ($tags[$post['$post_id']] as $tag):?>
+    <a href="#"><span class="label" style="background-color: #5bc0de"><?=$tag?></span></a> <? endforeach?>
