@@ -33,7 +33,7 @@
                                     </div>
                                 </div>
                                 <div class="comment-text">
-                                    Awesome design
+                                    <?=$comment['comment_text']?>
                                 </div>
                                 <div class="action">
                                     <button type="button" class="btn btn-primary btn-xs" title="Edit">
