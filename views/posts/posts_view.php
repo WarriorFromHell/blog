@@ -3,7 +3,7 @@
    <h1> <?=$post['post_subject']?> </h1>
     <p> <?=$post['post_text']?> </p>
     <div>
-        <span class="badge badge-success"><?=$today = date("F j, Y, g:i a"); ?></span><div class="pull-right"><span class="label">alice</span> <span class="label">story</span> <span class="label">blog</span> <span class="label">personal</span></div>
+        <span class="badge badge-success"><?=date("F j, Y, g:i a")?></span><div class="pull-right"><span class="label">alice</span> <span class="label">story</span> <span class="label">blog</span> <span class="label">personal</span></div>
     </div>
 </div>
 </div>
@@ -28,6 +28,7 @@
                             <div class="commentText">
                                 <?=$comment['comment_created']?>
                                 <?=$comment['comment_author']?>
+                                <?=$comment['comment_time']?>
                                 <p><?=$comment['comment_text']?></p>
                             </div>
                         </li>
